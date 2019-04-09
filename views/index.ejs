@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Lightning Message Board</title>
+</head>
+<body>
+  <div class="content">
+    <ul>
+      <% messages.forEach(function(message){ %>
+      <li><%= message.content %> - <%= (new Date(message.createdAt)).toLocaleTimeString() %></li>
+      <% }) %>
+    </ul>
+
+    <form action="/messages" method="POST">
+      <label for="message">Your message:</label>
+      <input type="text" name="message" id="message"
+      autocomplete="off" />
+      <button>Submit</button>
+    </form>
+  </div>
+</body>
+</html>
