@@ -1,5 +1,6 @@
 const app = require('./app.js');
 const axios = require('axios');
+const crypto = require('crypto');
 const db = require('./db.js');
 
 const opennodeKey = '95164e77-7feb-43f1-9fb7-f5c1149d84dc';
@@ -35,15 +36,24 @@ app.post('/messages', async (req, res) => {
 app.post('/webhook', (req, res) => {
   console.log('OpenNode Webhook', req.body);
 
-  const status = req.body.status;
+  const { id, order_id, hashed_order, status } = req.body;
+
+  const ourHashedOrder = crypto
+    .createHmac('sha256', opennodeKey)
+    .update(id)
+    .digest('hex');
+
+  if(hashed_order !== ourHashedOrder) {
+    return res.send('Fake callback');
+  }
 
   if(status !== 'paid') {
-    return res.send('Order not paid');
+    return res.send('Order not paid yet');
   }
 
   db.markMessageAsPaid(req.body.order_id);
 
-  return res.send('Order paid');
+  return res.send('');
 });
 
 app.listen(3000, () => console.log(`App listening on port 3000!`));
