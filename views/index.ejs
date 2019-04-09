@@ -12,10 +12,46 @@
 
     <form action="/messages" method="POST">
       <label for="message">Your message:</label>
-      <input type="text" name="message" id="message"
+      <input type="text" oninput="updatePrice(this.value)" name="message" id="message"
       autocomplete="off" />
       <button>Submit</button>
     </form>
+    <div id="price"></div>
   </div>
 </body>
+
+<script>
+function updatePrice(message) {
+  document.getElementById('price').innerHTML = 'The price is ' + message.length + ' satoshis';
+}
+</script>
+
+<style>
+body {
+  font-family: 'Helvetica';
+  font-size: 16px;
+}
+.content {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  padding: 1rem;
+}
+.content ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.content li {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background-color: #F5F6F7;
+}
+.content form {
+  margin-top: 1rem;
+}
+.content form input {
+  padding: 0.5rem;
+}
+</style>
 </html>

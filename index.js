@@ -22,7 +22,7 @@ app.post('/messages', async (req, res) => {
   });
 
   axios.post('https://dev-api.opennode.co/v1/charges', {
-    amount: 1,
+    amount: content.length,
     description: 'New message',
     order_id: id,
     callback_url: replUrl + '/webhook'
