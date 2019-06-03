@@ -3,12 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "sqlite3": "^4.0.6"
